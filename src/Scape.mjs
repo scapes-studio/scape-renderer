@@ -76,6 +76,8 @@ export default class Scape {
       .filter(t => ! t.display_type) // Filter out date
       .map((trait, index, attributes) => {
         let fileName = trait.value
+        const traitConfig = ELEMENT_CONFIG[trait.trait_type]?._config
+        const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName]
 
         // Handle Planets + Topology
         if (trait.trait_type === 'Planet') {
@@ -98,9 +100,6 @@ export default class Scape {
           fileName = variations[version]
         }
 
-        const traitConfig = ELEMENT_CONFIG[trait.trait_type]._config
-        const elementConfig = ELEMENT_CONFIG[trait.trait_type][fileName]
-
         return {
           input: `data/base_traits/${trait.trait_type}/${fileName}.png`,
           left: elementConfig?.x || 0,
@@ -110,6 +109,7 @@ export default class Scape {
           z_index: traitConfig.zIndex,
           trait_type: trait.trait_type,
           value: trait.value,
+          version,
         }
       })
       .filter(l => !! l) // Remove empty traits (e.g. topology)
@@ -145,7 +145,7 @@ export default class Scape {
 
     for (const layer of this.layers) {
       if (layer.input.includes('flipped')) {
-        layer.input = await sharp(layer.input.replace('.flipped', '')).flip().toBuffer()
+        layer.input = await sharp(layer.input.replace('.flipped', '')).flop().toBuffer()
       }
 
       if (layer.top < 0 || layer.left < 0) {
@@ -165,6 +165,63 @@ export default class Scape {
       }
 
       layers.push(layer)
+    }
+
+    return this.computeOffsets(layers)
+  }
+
+  computeOffsets (layers) {
+    if (
+      this.landMarkCount > 1 &&
+      (
+        (this.hasPlanet && !this.hasLandscape) ||
+        this.landScapeType === 'Lowland' ||
+        this.landScapeType === 'Island'
+      )
+    ) {
+      layers[layers.length - 2].left -=8
+      layers[layers.length - 1].left += 8
+    }
+
+    if (this.landScapeType === 'Hill') {
+      if (this.landMarkCount === 1) {
+        layers[layers.length - 1].left += 20
+      } else if (this.landMarkCount === 2) {
+        layers[layers.length - 2].left += 16
+        layers[layers.length - 1].left += 26
+      }
+    }
+
+    if (this.landScapeType === 'Valley') {
+      if (this.landMarkCount === 1) {
+        layers[layers.length - 1].left += 18
+      } else if (this.landMarkCount === 2) {
+        layers[layers.length - 2].left += 16
+        layers[layers.length - 1].left += 26
+      }
+    }
+
+    if (this.landScapeType === 'Beach') {
+      if (this.landMarkCount === 1) {
+        layers[layers.length - 1].left += 20
+      } else if (this.landMarkCount === 2) {
+        layers[layers.length - 2].left += 12
+        layers[layers.length - 1].left += 26
+      }
+    }
+
+    if (this.landScapeType === 'Lagoon') {
+      if (this.landMarkCount === 1) {
+        layers[layers.length - 1].left += 24
+      } else if (this.landMarkCount === 2) {
+        layers[layers.length - 2].left += 16
+        layers[layers.length - 1].left += 28
+      }
+    }
+
+    const hasBeam = layers[layers.length - 1].version === 1
+    if (this.hasUFO && !this.hasPlanet && !this.hasLandscape && !this.hasCity) {
+      layers[layers.length - 1].top += hasBeam ? 2 : 4
     }
 
     return layers
