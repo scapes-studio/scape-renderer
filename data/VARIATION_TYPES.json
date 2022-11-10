@@ -1,0 +1,67 @@
+{
+    "Mansion Lvl 1": [
+        "Mansion Lvl 1",
+        "Mansion Lvl 1 Lights On"
+    ],
+    "Mansion Lvl 5": [
+        "Mansion Lvl 5",
+        "Mansion Lvl 5 Lights On"
+    ],
+    "Shuttle": [
+        "Shuttle",
+        "Shuttle Fire"
+    ],
+    "Saturn V": [
+        "Saturn V Lift Off",
+        "Saturn V"
+    ],
+    "UFO": [
+        "UFO",
+        "UFO Beam"
+    ],
+    "BFR": [
+        "BFR",
+        "BFR Fleet"
+    ],
+    "Cyber Truck": [
+        "Cyber Truck",
+        "Cyber Truck.flipped"
+    ],
+    "Police Car": [
+        "Police Car",
+        "Police Car Front"
+    ],
+    "Broadleaf": [
+        "Broadleaf Spring",
+        "Broadleaf Autumn"
+    ],
+    "Prism Sun": [
+        "Synthwave Prism Sun",
+        "Prism Sun"
+    ],
+    "Block Tree": [
+        "Block Tree",
+        "Fruit Block Tree",
+        "Gold Block Tree"
+    ],
+    "Sportscar": [
+        "Sportscar",
+        "Sportscar Spoiler"
+    ],
+    "Sherp": [
+        "Track Sherp",
+        "Sherp"
+    ],
+    "Pickup": [
+        "Pickup.flipped",
+        "Pickup"
+    ],
+    "Sedan": [
+        "Sedan.flipped",
+        "Sedan"
+    ],
+    "Delivery Van": [
+        "Delivery Van",
+        "Delivery Van.flipped"
+    ]
+}

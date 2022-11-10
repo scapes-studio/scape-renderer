@@ -5,3 +5,7 @@ node_modules
 
 # MacOS
 .DS_Store
+
+# Media
+dist
+!dist/.gitkeep

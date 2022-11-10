@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "sharp": "^0.31.2"
+    "sharp": "^0.31.2",
+    "yaml": "^2.1.3"
   }
 }

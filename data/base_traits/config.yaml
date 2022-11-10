@@ -10,7 +10,7 @@ Atmosphere:
 Sky:
   _config:
     isObject: false
-    zIndex: 0
+    zIndex: 10
     canFlipX: true
     canFlipY: true
     seamlessX: false
@@ -100,7 +100,7 @@ Fluid:
 Landscape:
   _config:
     isObject: false
-    zIndex: 50
+    zIndex: 60
     canFlipX: true
     canFlipY: false
     seamlessX: true
@@ -199,11 +199,6 @@ Buildings:
     x: 25
     y: 3
   Old House:
-    width: 24
-    height: 24
-    x: 24
-    y: 0
-  XXX:
     width: 24
     height: 24
     x: 24
