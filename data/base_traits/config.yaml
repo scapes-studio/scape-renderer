@@ -1,0 +1,480 @@
+Atmosphere:
+  _config:
+    isObject: false
+    zIndex: 0
+    canFlipX: true
+    canFlipY: true
+    seamlessX: true
+    seamlessY: true
+
+Sky:
+  _config:
+    isObject: false
+    zIndex: 0
+    canFlipX: true
+    canFlipY: true
+    seamlessX: false
+    seamlessY: true
+
+Celestial:
+  _config:
+    isObject: false
+    zIndex: 20
+    canFlipX: true
+    canFlipY: true
+    seamlessX: false
+    seamlessY: false
+  Blue Planet:
+    width: 24
+    height: 24
+    x: 10
+    y: -7
+  Earths:
+    width: 24
+    height: 24
+    x: 14
+    y: -6
+  Soul Planet:
+    width: 32
+    height: 32
+    x: 12
+    y: -15
+  Jupiter:
+    width: 32
+    height: 32
+    x: 4
+    y: -11
+  Jupiter and his Moon:
+    width: 40
+    height: 32
+    x: -9
+    y: -10
+  Prism Sun:
+    width: 24
+    height: 24
+    x: 8
+    y: -1
+  Synthwave Prism Sun:
+    width: 24
+    height: 24
+    x: 8
+    y: -1
+  Sunset:
+    width: 40
+    height: 40
+    x: 16
+    y: -8
+  Big Shades:
+    width: 40
+    height: 40
+    x: 16
+    y: -8
+
+Planet:
+  _config:
+    isObject: false
+    zIndex: 30
+    canFlipX: true
+    canFlipY: false
+    seamlessX: true
+    seamlessY: false
+
+City:
+  _config:
+    isObject: false
+    zIndex: 40
+    canFlipX: true
+    canFlipY: false
+    seamlessX: true
+    seamlessY: false
+
+Fluid:
+  _config:
+    isObject: false
+    zIndex: 50
+    canFlipX: true
+    canFlipY: false
+    seamlessX: true
+    seamlessY: false
+
+Landscape:
+  _config:
+    isObject: false
+    zIndex: 50
+    canFlipX: true
+    canFlipY: false
+    seamlessX: true
+    seamlessY: false
+
+Trees:
+  _config:
+    isObject: true
+    zIndex: 80
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  Palm:
+    width: 24
+    height: 24
+    x: 23
+    y: 3
+  Oasis:
+    width: 24
+    height: 24
+    x: 23
+    y: 2
+  Small Forest:
+    width: 24
+    height: 24
+    x: 24
+    y: 3
+  Red Oak:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Tree of Life:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+  Burned Tree:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+  Old Tree:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+  Block Tree:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Fruit Block Tree:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Gold Block Tree:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Broadleaf Spring:
+    width: 24
+    height: 24
+    x: 24
+    y: -1
+  Broadleaf Autumn:
+    width: 24
+    height: 24
+    x: 24
+    y: -1
+
+Buildings:
+  _config:
+    isObject: true
+    zIndex: 70
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  Lighthouse:
+    width: 24
+    height: 24
+    x: 25
+    y: 1
+  Hut:
+    width: 24
+    height: 24
+    x: 23
+    y: 2
+  Tiny House:
+    width: 24
+    height: 24
+    x: 25
+    y: 3
+  Old House:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  XXX:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Mansion Lvl 1:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Mansion Lvl 1 Lights On:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Mansion Lvl 2:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Mansion Lvl 3:
+    width: 24
+    height: 24
+    x: 24
+    y: 3
+  Mansion Lvl 4:
+    width: 24
+    height: 24
+    x: 24
+    y: 4
+  Mansion Lvl 5:
+    width: 32
+    height: 24
+    x: 20
+    y: 2
+  Mansion Lvl 5 Lights On:
+    width: 32
+    height: 24
+    x: 20
+    y: 2
+  Temple:
+    width: 32
+    height: 24
+    x: 20
+    y: 1
+  Windmill:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Mini House:
+    width: 24
+    height: 24
+    x: 24
+    y: 3
+  Chinese Gate:
+    width: 24
+    height: 24
+    x: 23
+    y: 0
+  Pyramid:
+    width: 32
+    height: 24
+    x: 20
+    y: 3
+  Colosseum:
+    width: 40
+    height: 24
+    x: 16
+    y: 3
+  Burj:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Big Ben:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+
+Monuments:
+  _config:
+    isObject: true
+    zIndex: 90
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  Bitcoin and Ethereum:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Bitcoin:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Ethereum:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Skull:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Pillars:
+    width: 48
+    height: 24
+    x: 12
+    y: 0
+  Statue of Liberty:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+
+Rocketry:
+  _config:
+    isObject: true
+    zIndex: 100
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  BFR Fleet:
+    width: 40
+    height: 24
+    x: 16
+    y: 2
+  BFR:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+  Saturn V:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Saturn V Lift Off:
+    width: 48
+    height: 24
+    x: 12
+    y: 0
+  Shuttle:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+  Shuttle Fire:
+    width: 40
+    height: 24
+    x: 19
+    y: 0
+  UFO:
+    width: 24
+    height: 24
+    x: 25
+    y: -5
+  UFO Beam:
+    width: 24
+    height: 24
+    x: 25
+    y: 0
+  Spacelab:
+    width: 24
+    height: 24
+    x: 24
+    y: 0
+
+Portals:
+  _config:
+    isObject: true
+    zIndex: 90
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  Round Portal:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+  Square Portal:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+  Beams:
+    width: 32
+    height: 24
+    x: 20
+    y: 0
+
+Animals:
+  _config:
+    isObject: true
+    zIndex: 90
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  Unicorn:
+    width: 40
+    height: 24
+    x: 19
+    y: -1
+  Fox:
+    width: 32
+    height: 24
+    x: 21
+    y: 0
+
+Cars:
+  _config:
+    isObject: true
+    zIndex: 120
+    canFlipX: true
+    canFlipY: false
+    seamlessX: false
+    seamlessY: false
+  Sportscar:
+    width: 24
+    height: 24
+    x: 24
+    y: 4
+  Sportscar Spoiler:
+    width: 24
+    height: 24
+    x: 24
+    y: 4
+  Track Sherp:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Sherp:
+    width: 24
+    height: 24
+    x: 24
+    y: 2
+  Pickup:
+    width: 32
+    height: 24
+    x: 20
+    y: 4
+  Sedan:
+    width: 32
+    height: 24
+    x: 20
+    y: 3
+  Delivery Van:
+    width: 24
+    height: 24
+    x: 24
+    y: 3
+  Cyber Truck:
+    width: 48
+    height: 24
+    x: 14
+    y: 2
+  Police Car:
+    width: 32
+    height: 24
+    x: 20
+    y: 3
+  Police Car Front:
+    width: 24
+    height: 24
+    x: 23
+    y: 2
