@@ -117,7 +117,9 @@ export default class Scape {
   }
 
   async render () {
-    const layers = await this.prepareLayers()
+    let layers = this.computeDefaultOffsets(this.layers)
+    await this.computeCustomHeightOffsets(layers)
+    await this.prepareLayers(layers)
 
     try {
       const image = await sharp({
@@ -140,15 +142,13 @@ export default class Scape {
     }
   }
 
-  async prepareLayers () {
-    const layers = []
-
-    for (const layer of this.layers) {
+  async prepareLayers (layers) {
+    for (const layer of layers) {
       if (layer.input.includes('flipped')) {
         layer.input = await sharp(layer.input.replace('.flipped', '')).flop().toBuffer()
       }
 
-      if (layer.top < 0 || layer.left < 0) {
+      if (layer.height > this.height) {
         const area = {
           left: layer.left < 0 ? Math.abs(layer.left) : 0,
           top: layer.top < 0 ? Math.abs(layer.top) : 0,
@@ -163,14 +163,12 @@ export default class Scape {
         }
         layer.input = await sharp(layer.input).extract(area).toBuffer()
       }
-
-      layers.push(layer)
     }
 
-    return this.computeOffsets(layers)
+    return layers
   }
 
-  computeOffsets (layers) {
+  computeDefaultOffsets (layers) {
     if (
       this.landMarkCount > 1 &&
       (
@@ -222,6 +220,33 @@ export default class Scape {
     const hasBeam = layers[layers.length - 1].version === 1
     if (this.hasUFO && !this.hasPlanet && !this.hasLandscape && !this.hasCity) {
       layers[layers.length - 1].top += hasBeam ? 2 : 4
+    }
+
+    return layers
+  }
+
+  async computeCustomHeightOffsets (layers) {
+    const DIFF = this.height - DEFAULT_HEIGHT
+    const HALF = parseInt(DIFF / 2)
+
+    for (const [index, layer] of layers.entries()) {
+      if (layer.trait_type === 'Atmosphere') {
+        layers[index].input = await sharp(layer.input)
+          .resize(null, DEFAULT_HEIGHT * 2)
+          .extract({ left: 0, top: HALF, width: 72, height: this.height })
+          .toBuffer()
+        layers[index].height = this.height
+      } else if (layer.trait_type === 'Sky') {
+        layers[index].tile = true
+      } else if (layer.trait_type === 'Celestial') {
+        if (layer.value.includes('Clouds')) {
+          layers[index].tile = true
+        } else {
+          layers[index].top = layer.top + HALF
+        }
+      } else {
+        layers[index].top = layer.top + DIFF
+      }
     }
 
     return layers

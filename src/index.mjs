@@ -1,10 +1,19 @@
+import minimist from 'minimist'
 import COLLECTION from './../data/COLLECTION.json'  assert { type: 'json' }
 import Scape from './Scape.mjs'
 
+const options = minimist(process.argv.slice(2))
+const ID = options.id
+const DEFAULT_HEIGHT = 24
+const HEIGHT = options.height || DEFAULT_HEIGHT
+
 const run = async () => {
-  // return await (new Scape(678)).render()
+  if (ID) {
+    return await (new Scape(ID)).setHeight(HEIGHT).render()
+  }
+
   for (const scape of COLLECTION) {
-    await (new Scape(scape.id)).render()
+    await (new Scape(scape.id)).setHeight(HEIGHT).render()
   }
 }
 
