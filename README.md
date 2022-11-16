@@ -8,7 +8,7 @@ A simple script to render Scapes based on [Scape Element](https://opensea.io/col
 3. Run `npm install` to install libraries
 
 ## Rendering images
-- `node src/index --id=123` "Render Scape #123 at its default dimensions"
-- `node src/index --id=123 --height=32` "Render Scape #123 at 32px height"
-- `node src/index` "Render all Scapes at their default dimensions"
-- `node src/index --height=32` "Render all Scapes with a height of 32px"
+- `node src/index.mjs --id=123` "Render Scape #123 at its default dimensions"
+- `node src/index.mjs --id=123 --height=32` "Render Scape #123 at 32px height"
+- `node src/index.mjs` "Render all Scapes at their default dimensions"
+- `node src/index.mjs --height=32` "Render all Scapes with a height of 32px"
