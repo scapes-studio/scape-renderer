@@ -7,5 +7,5 @@ node_modules
 .DS_Store
 
 # Media
-dist
+dist/*
 !dist/.gitkeep
