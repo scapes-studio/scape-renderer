@@ -232,8 +232,7 @@ export default class Scape {
     for (const [index, layer] of layers.entries()) {
       if (layer.trait_type === 'Atmosphere') {
         layers[index].input = await sharp(layer.input)
-          .resize(null, DEFAULT_HEIGHT * 2)
-          .extract({ left: 0, top: HALF, width: 72, height: this.height })
+          .resize(DEFAULT_WIDTH, this.height, { kernel: 'nearest' })
           .toBuffer()
         layers[index].height = this.height
       } else if (layer.trait_type === 'Sky') {
