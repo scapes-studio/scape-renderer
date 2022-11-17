@@ -9,7 +9,7 @@ const HEIGHT = options.height || DEFAULT_HEIGHT
 const SKIP_LANDMARKS = options['skip-landmarks'] || false
 
 const renderScape = async (id) => {
-  const scape = (new Scape(ID)).setHeight(HEIGHT)
+  const scape = (new Scape(id)).setHeight(HEIGHT)
 
   if (SKIP_LANDMARKS) {
     scape.skipLandmarks()
