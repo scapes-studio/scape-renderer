@@ -20,12 +20,17 @@ export default class Scape {
     this.variations = VARIATIONS[id]
     this.width = DEFAULT_WIDTH
     this.height = DEFAULT_HEIGHT
+    this.includeLandmarks = true
   }
 
   setHeight (height) {
     this.height = height
 
     return this
+  }
+
+  skipLandmarks () {
+    this.includeLandmarks = false
   }
 
   getAttribute (type, key = 'trait_type') {
@@ -116,7 +121,7 @@ export default class Scape {
   async render () {
     let layers = this.computeDefaultOffsets(this.layers)
     await this.computeCustomHeightOffsets(layers)
-    await this.prepareLayers(layers)
+    layers = await this.prepareLayers(layers)
 
     try {
       const image = await sharp({
@@ -162,8 +167,14 @@ export default class Scape {
       }
     }
 
-    // Final sort...
-    return layers.sort((a, b) => a.z_index > b.z_index ? 1 : -1)
+    // Final sort and filter...
+    return layers
+      .sort((a, b) => a.z_index > b.z_index ? 1 : -1)
+      .filter(l => {
+        if (! this.includeLandmarks && LANDMARKS.includes(l.trait_type)) return false
+
+        return true
+      })
   }
 
   computeDefaultOffsets (layers) {
