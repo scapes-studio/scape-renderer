@@ -76,8 +76,6 @@ export default class Scape {
       .filter(t => ! t.display_type) // Filter out date
       .map((trait, index, attributes) => {
         let fileName = trait.value
-        const traitConfig = ELEMENT_CONFIG[trait.trait_type]?._config
-        const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName]
 
         // Handle Planets + Topology
         if (trait.trait_type === 'Planet') {
@@ -99,6 +97,9 @@ export default class Scape {
 
           fileName = variations[version]
         }
+
+        const traitConfig = ELEMENT_CONFIG[trait.trait_type]?._config
+        const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName]
 
         return {
           input: `data/base_traits/${trait.trait_type}/${fileName}.png`,
@@ -230,7 +231,7 @@ export default class Scape {
     const HALF = parseInt(DIFF / 2)
 
     for (const [index, layer] of layers.entries()) {
-      if (layer.trait_type === 'Atmosphere') {
+      if (layer.trait_type === 'Atmosphere' && this.height > DEFAULT_HEIGHT) {
         layers[index].input = await sharp(layer.input)
           .resize(DEFAULT_WIDTH, this.height, { kernel: 'nearest' })
           .toBuffer()
