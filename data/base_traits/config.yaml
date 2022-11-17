@@ -207,7 +207,7 @@ Buildings:
     width: 24
     height: 24
     x: 24
-    y: 0
+    y: 2
   Mansion Lvl 1 Lights On:
     width: 24
     height: 24
@@ -399,7 +399,7 @@ Portals:
 Animals:
   _config:
     isObject: true
-    zIndex: 90
+    zIndex: 100
     canFlipX: true
     canFlipY: false
     seamlessX: false
