@@ -162,7 +162,8 @@ export default class Scape {
       }
     }
 
-    return layers
+    // Final sort...
+    return layers.sort((a, b) => a.z_index > b.z_index ? 1 : -1)
   }
 
   computeDefaultOffsets (layers) {
