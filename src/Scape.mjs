@@ -63,16 +63,8 @@ export default class Scape {
     return !! this.landScapeType
   }
 
-  get sortedAttributes () {
-    return this.attributes.sort((a, b) => {
-      const aIndex = SORTING.findIndex(i => i === a.trait_type)
-      const bIndex = SORTING.findIndex(i => i === b.trait_type)
-      return aIndex > bIndex ? 1 : -1
-    })
-  }
-
   get layers () {
-    return this.sortedAttributes
+    return this.attributes
       .filter(t => ! t.display_type) // Filter out date
       .map((trait, index, attributes) => {
         let fileName = trait.value
@@ -114,7 +106,11 @@ export default class Scape {
         }
       })
       .filter(l => !! l) // Remove empty traits (e.g. topology)
-      .sort((a, b) => a.z_index > b.z_index ? 1 : -1)
+      .sort((a, b) => {
+        const aIndex = SORTING.findIndex(i => i === a.trait_type)
+        const bIndex = SORTING.findIndex(i => i === b.trait_type)
+        return aIndex > bIndex ? 1 : -1
+      })
   }
 
   async render () {
