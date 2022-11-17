@@ -109,7 +109,7 @@ Landscape:
 Trees:
   _config:
     isObject: true
-    zIndex: 80
+    zIndex: 85
     canFlipX: true
     canFlipY: false
     seamlessX: false
@@ -282,7 +282,7 @@ Buildings:
 Monuments:
   _config:
     isObject: true
-    zIndex: 90
+    zIndex: 75
     canFlipX: true
     canFlipY: false
     seamlessX: false
@@ -399,7 +399,7 @@ Portals:
 Animals:
   _config:
     isObject: true
-    zIndex: 100
+    zIndex: 95
     canFlipX: true
     canFlipY: false
     seamlessX: false
@@ -418,7 +418,7 @@ Animals:
 Cars:
   _config:
     isObject: true
-    zIndex: 120
+    zIndex: 80
     canFlipX: true
     canFlipY: false
     seamlessX: false
