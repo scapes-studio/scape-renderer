@@ -448,7 +448,17 @@ Cars:
     height: 24
     x: 20
     y: 4
+  Pickup.flipped:
+    width: 32
+    height: 24
+    x: 20
+    y: 4
   Sedan:
+    width: 32
+    height: 24
+    x: 20
+    y: 3
+  Sedan.flipped:
     width: 32
     height: 24
     x: 20
@@ -458,10 +468,20 @@ Cars:
     height: 24
     x: 24
     y: 3
+  Delivery Van.flipped:
+    width: 24
+    height: 24
+    x: 24
+    y: 3
   Cyber Truck:
     width: 48
     height: 24
     x: 14
+    y: 2
+  Cyber Truck.flipped:
+    width: 48
+    height: 24
+    x: 13
     y: 2
   Police Car:
     width: 32

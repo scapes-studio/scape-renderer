@@ -96,7 +96,7 @@ export default class Scape {
         }
 
         const traitConfig = ELEMENT_CONFIG[trait.trait_type]?._config
-        const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName.replace('.flipped', '')]
+        const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName]
 
         return {
           input: `data/base_traits/${trait.trait_type}/${fileName}.png`,
