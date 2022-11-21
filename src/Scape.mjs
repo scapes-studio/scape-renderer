@@ -21,6 +21,7 @@ export default class Scape {
     this.width = DEFAULT_WIDTH
     this.height = DEFAULT_HEIGHT
     this.includeLandmarks = true
+    this.increaseSunSize = false
   }
 
   setHeight (height) {
@@ -31,6 +32,10 @@ export default class Scape {
 
   skipLandmarks () {
     this.includeLandmarks = false
+  }
+
+  bumpSuns () {
+    this.increaseSunSize = true
   }
 
   getAttribute (type, key = 'trait_type') {
@@ -150,11 +155,20 @@ export default class Scape {
         layer.input = await sharp(layer.input.replace('.flipped', '')).flop().toBuffer()
       }
 
-      if (layer.height > this.height) {
+      if (this.increaseSunSize && ['Sunset', 'Big Shades'].includes(layer.value)) {
+        const dimension = 56
+        layer.input = layer.input.replace('.png', `@${dimension}.png`)
+        layer.width = dimension
+        layer.height = dimension
+        layer.left = (this.width - dimension) / 2
+        layer.top = (this.height - dimension) / 2
+      }
+
+      if (layer.height > this.height || layer.width > this.width) {
         const area = {
           left: layer.left < 0 ? Math.abs(layer.left) : 0,
           top: layer.top < 0 ? Math.abs(layer.top) : 0,
-          width: layer.left < 0 ? layer.left + layer.width : layer.width,
+          width: Math.min(this.width, layer.left < 0 ? layer.width - Math.abs(layer.left) : layer.width),
           height: Math.min(this.height, layer.height - Math.abs(layer.top)),
         }
         if (layer.top < 0) {
