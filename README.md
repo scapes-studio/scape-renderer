@@ -12,3 +12,8 @@ A simple script to render Scapes based on [Scape Element](https://opensea.io/col
 - `node src/index.mjs --id=123 --height=32` "Render Scape #123 at 32px height"
 - `node src/index.mjs` "Render all Scapes at their default dimensions"
 - `node src/index.mjs --height=32` "Render all Scapes with a height of 32px"
+
+## Options
+- `--skip-landmarks`: Don't render things like Buildings, Cars, etc.
+- `--bump-suns`: Use bigger assets for Sunset and Big Shades Celestials
+- `--height={123}`: Set a custom height for the render
