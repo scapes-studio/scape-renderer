@@ -17,3 +17,5 @@ A simple script to render Scapes based on [Scape Element](https://opensea.io/col
 - `--skip-landmarks`: Don't render things like Buildings, Cars, etc.
 - `--bump-suns`: Use bigger assets for Sunset and Big Shades Celestials
 - `--height={123}`: Set a custom height for the render
+- `--upscale`: Upscale the output to 1440px width
+- `--upscale={123}`: Upscale the output to {123}px width

@@ -22,12 +22,17 @@ export default class Scape {
     this.height = DEFAULT_HEIGHT
     this.includeLandmarks = true
     this.increaseSunSize = false
+    this.outputWidth = this.width
   }
 
   setHeight (height) {
     this.height = height
 
     return this
+  }
+
+  upscale (width = DEFAULT_WIDTH * 20) {
+    this.outputWidth = width
   }
 
   skipLandmarks () {
@@ -129,7 +134,7 @@ export default class Scape {
     layers = await this.prepareLayers(layers)
 
     try {
-      const image = await sharp({
+      let image = await sharp({
         create: {
           width: this.width,
           height: this.height,
@@ -139,6 +144,11 @@ export default class Scape {
       }).png()
 
       await image.composite(layers)
+
+      if (this.outputWidth > DEFAULT_WIDTH) {
+        image = await sharp(await image.toBuffer())
+          .resize(this.outputWidth, null, { kernel: 'nearest' })
+      }
 
       fs.writeFileSync(`dist/${this.id}.png`, await image.toBuffer())
 

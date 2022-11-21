@@ -8,6 +8,7 @@ const DEFAULT_HEIGHT = 24
 const HEIGHT = options.height || DEFAULT_HEIGHT
 const SKIP_LANDMARKS = options['skip-landmarks'] || false
 const BUMP_SUNS = options['bump-suns'] || false
+const UPSCALE = options['upscale'] || false
 
 const renderScape = async (id) => {
   const scape = (new Scape(id)).setHeight(HEIGHT)
@@ -18,6 +19,11 @@ const renderScape = async (id) => {
 
   if (BUMP_SUNS) {
     scape.bumpSuns()
+  }
+
+  if (UPSCALE) {
+    const width = typeof UPSCALE === 'number' ? UPSCALE : undefined
+    scape.upscale(width)
   }
 
   return await scape.render()
