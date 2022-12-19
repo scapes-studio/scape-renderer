@@ -170,8 +170,14 @@ export default class Scape {
         layer.input = layer.input.replace('.png', `@${dimension}.png`)
         layer.width = dimension
         layer.height = dimension
-        layer.left = (this.width - dimension) / 2
-        layer.top = (this.height - dimension) / 2
+        layer.left = Math.floor((this.width - dimension) / 2)
+        layer.top = Math.floor((this.height - dimension * 2))
+      }
+
+      if ((this.hasPlanet || this.hasLandscape || this.hasCity) &&
+        ['Sunset', 'Big Shades'].includes(layer.value) && this.height >= 56
+      ) {
+        layer.top = layer.top + 4
       }
 
       if (layer.height > this.height || layer.width > this.width) {
@@ -250,9 +256,16 @@ export default class Scape {
       }
     }
 
-    const hasBeam = layers[layers.length - 1].version === 1
+    const hasBeam = this.hasUFO && layers[layers.length - 1].version === 1
     if (this.hasUFO && !this.hasPlanet && !this.hasLandscape && !this.hasCity) {
       layers[layers.length - 1].top += hasBeam ? 2 : 4
+    }
+
+    const isFlying = hasBeam ||
+      layers[layers.length - 1].value.startsWith('Shuttle') ||
+      layers[layers.length - 1].value.startsWith('Spacelab')
+    if (isFlying) {
+      layers[layers.length - 1].top -= (this.height / 2 - 16)
     }
 
     return layers

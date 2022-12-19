@@ -69,6 +69,11 @@ Celestial:
     height: 40
     x: 16
     y: -8
+  Soul Meteors:
+    width: 72
+    height: 48
+    x: 0
+    y: -24
 
 Planet:
   _config:
@@ -78,6 +83,11 @@ Planet:
     canFlipY: false
     seamlessX: true
     seamlessY: false
+  Volcano Earth:
+    width: 72
+    height: 32
+    x: 0
+    y: -8
 
 City:
   _config:
@@ -200,9 +210,9 @@ Buildings:
     y: 3
   Old House:
     width: 24
-    height: 24
-    x: 24
-    y: 0
+    height: 32
+    x: 21
+    y: -8
   Mansion Lvl 1:
     width: 24
     height: 24
@@ -353,18 +363,18 @@ Rocketry:
     y: 0
   Shuttle Fire:
     width: 40
-    height: 24
+    height: 32
     x: 19
-    y: 0
+    y: -8
   UFO:
     width: 24
     height: 24
     x: 25
     y: -5
   UFO Beam:
-    width: 24
-    height: 24
-    x: 25
+    width: 48
+    height: 96
+    x: 13
     y: 0
   Spacelab:
     width: 24
@@ -392,9 +402,9 @@ Portals:
     y: 0
   Beams:
     width: 32
-    height: 24
+    height: 240
     x: 20
-    y: 0
+    y: -216
 
 Animals:
   _config:
