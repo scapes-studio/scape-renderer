@@ -264,7 +264,7 @@ export default class Scape {
     const isFlying = hasBeam ||
       layers[layers.length - 1].value.startsWith('Shuttle') ||
       layers[layers.length - 1].value.startsWith('Spacelab')
-    if (isFlying) {
+    if (isFlying && this.height > DEFAULT_HEIGHT) {
       layers[layers.length - 1].top -= (this.height / 2 - 16)
     }
 

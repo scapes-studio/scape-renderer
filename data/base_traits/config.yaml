@@ -365,7 +365,7 @@ Rocketry:
     width: 40
     height: 32
     x: 19
-    y: -8
+    y: 0
   UFO:
     width: 24
     height: 24
