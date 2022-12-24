@@ -1,0 +1,128 @@
+import fs from 'fs'
+import path from 'path'
+import sharp from 'sharp'
+import ScapeFactory from './ScapeFactory.mjs'
+import SORTING from './../data/SORTING.json'  assert { type: 'json' }
+
+const SCAPE_WIDTH = 72
+const SCAPE_SIZE = 14
+const PART_SIZE = 16
+
+export default class Merge {
+
+  /**
+   * @param {object} mergeConfig e.g. [[[ID, FLIP_X, FLIP_Y]], FADE]
+   */
+  constructor(mergeConfig) {
+    this.mergeConfig = mergeConfig
+  }
+
+  static fromCommand(command) {
+    let cmds = command.split(' ')
+    if (command.startsWith('!')) cmds.shift()
+
+    const config = [
+      [],
+      Number(cmds[0] === 'fade'),
+    ]
+
+    for (let i = 0; i < cmds.slice(1).length; i++) {
+      const id = BigInt(Number(
+        cmds.slice(1)[i].match(/\d+/)[0]
+      ))
+      config[0].push([
+        id,
+        cmds.slice(1)[i].includes('h'),
+        cmds.slice(1)[i].includes('v'),
+      ])
+    }
+
+    return new Merge(config)
+  }
+
+  get id () {
+    let mergeId = BigInt(Number(this.fade))
+
+    this.mergeConfig[0].forEach((part, i) => {
+      const id = part[0]
+      const flipX = part[1]
+      const flipY = part[2]
+
+      const mergePartBytes = BigInt(id) | BigInt(flipX << 14) | BigInt(flipY << 15)
+      mergeId |= mergePartBytes << BigInt(PART_SIZE * i) + BigInt(1)
+    })
+
+    return mergeId
+  }
+
+  get fade () {
+    return this.mergeConfig[1]
+  }
+
+  get scapes () {
+    return this.mergeConfig[0]
+      .map(([id, flipX, flipY]) => [ScapeFactory.create(id), flipX, flipY])
+  }
+
+  get count () {
+    return this.scapes.length
+  }
+
+  get width () {
+    return this.count * SCAPE_WIDTH
+  }
+
+  get height () {
+    return 24
+  }
+
+  async render () {
+    const scapeLayers = await Promise.all(this.scapes.map(config => config[0].prepareLayers()))
+    let layers = []
+
+    SORTING.forEach(category => {
+      scapeLayers.forEach((lrs, index) => {
+        const matching = lrs.filter(l => l._trait.type === category)
+
+        matching.forEach(l => {
+          layers.push({
+            ...l,
+            left: l.left + SCAPE_WIDTH * index
+          })
+        })
+      })
+    })
+
+    try {
+      let image = await sharp({
+        create: {
+          width: this.width,
+          height: this.height,
+          channels: 4,
+          background: { r: 0, g: 0, b: 0, alpha: 1 },
+        }
+      }).png()
+
+      await image.composite(layers)
+
+      if (this.outputWidth > this.width) {
+        image = await sharp(await image.toBuffer())
+          .resize(this.outputWidth, null, { kernel: 'nearest' })
+      }
+
+      this.image = await image.toBuffer()
+      console.log(`RENDERED SCAPE #${this.id}`)
+
+      return this.image
+    } catch (e) {
+      console.error(`IMAGE RENDERING ERROR FOR SCAPE #${this.id}`)
+      console.log(e, layers)
+    }
+  }
+
+  save (distPath = `dist/${this.id}.png`) {
+    fs.writeFileSync(distPath, this.image)
+    console.log(`RENDERED SCAPE #${this.id}`)
+  }
+
+}

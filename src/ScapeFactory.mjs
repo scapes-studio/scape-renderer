@@ -7,7 +7,7 @@ export default class ScapeFactory {
   static create (id) {
     return new Scape({
       id,
-      attributes: COLLECTION.find(s => s.id === id).attributes,
+      attributes: COLLECTION.find(s => s.id === parseInt(id)).attributes,
       variations: VARIATIONS[id],
     })
   }

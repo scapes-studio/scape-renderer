@@ -1,13 +1,20 @@
 import yaml from 'yaml'
+import path from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 import LANDMARKS from '../data/LANDMARKS.json'  assert { type: 'json' }
 import VARIATION_TYPES from './../data/VARIATION_TYPES.json'  assert { type: 'json' }
 import SORTING from './../data/SORTING.json'  assert { type: 'json' }
 import FADES from './../data/FADES.json'  assert { type: 'json' }
 
-const ELEMENT_CONFIG = yaml.parse(fs.readFileSync('data/base_traits/config.yaml').toString())
+const ELEMENT_CONFIG = yaml.parse(fs.readFileSync(
+  path.resolve(__dirname, './../data/base_traits/config.yaml')
+).toString())
 const DEFAULT_WIDTH = 72
 const DEFAULT_HEIGHT = 24
 
@@ -125,8 +132,10 @@ export default class Scape {
           width: elementConfig?.width || DEFAULT_WIDTH,
           height: elementConfig?.height || DEFAULT_HEIGHT,
           z_index: traitConfig.zIndex,
-          trait_type: trait.trait_type,
-          value: trait.value,
+          _trait: {
+            type: trait.trait_type,
+            value: trait.value,
+          },
           version,
         })
 
@@ -143,6 +152,11 @@ export default class Scape {
             width: 24,
             height: 24,
             z_index: leftConfig.zIndex,
+            _trait: {
+              type: trait.trait_type,
+              value: trait.value,
+              fade: true,
+            },
           })
 
           const rightConfig = fadedCategory[rightName]
@@ -153,6 +167,11 @@ export default class Scape {
             width: 24,
             height: 24,
             z_index: rightConfig.zIndex,
+            _trait: {
+              type: trait.trait_type,
+              value: trait.value,
+              fade: true,
+            },
           })
         }
       })
@@ -160,16 +179,14 @@ export default class Scape {
     return layers
       .filter(l => !! l) // Remove empty traits (e.g. topology)
       .sort((a, b) => {
-        const aIndex = SORTING.findIndex(i => i === a.trait_type)
-        const bIndex = SORTING.findIndex(i => i === b.trait_type)
+        const aIndex = SORTING.findIndex(i => i === a._trait.type)
+        const bIndex = SORTING.findIndex(i => i === b._trait.type)
         return aIndex > bIndex ? 1 : -1
       })
   }
 
   async render () {
-    let layers = this.computeDefaultOffsets(this.layers)
-    await this.computeCustomHeightOffsets(layers)
-    layers = await this.prepareLayers(layers)
+    let layers = await this.prepareLayers()
 
     try {
       let image = await sharp({
@@ -197,13 +214,16 @@ export default class Scape {
     }
   }
 
-  async prepareLayers (layers) {
+  async prepareLayers () {
+    let layers = this.computeDefaultOffsets(this.layers)
+    await this.computeCustomHeightOffsets(layers)
+
     for (const layer of layers) {
       if (layer.input.includes('flipped')) {
         layer.input = await sharp(layer.input.replace('.flipped', '')).flop().toBuffer()
       }
 
-      if (this.increaseSunSize && ['Sunset', 'Big Shades'].includes(layer.value)) {
+      if (this.increaseSunSize && ['Sunset', 'Big Shades'].includes(layer._trait.value)) {
         const dimension = 56
         layer.input = layer.input.replace('.png', `@${dimension}.png`)
         layer.width = dimension
@@ -213,7 +233,7 @@ export default class Scape {
       }
 
       if ((this.hasPlanet || this.hasLandscape || this.hasCity) &&
-        ['Sunset', 'Big Shades'].includes(layer.value) && this.height >= 56
+        ['Sunset', 'Big Shades'].includes(layer._trait.value) && this.height >= 56
       ) {
         layer.top = layer.top + 4
       }
@@ -239,7 +259,7 @@ export default class Scape {
     return layers
       .sort((a, b) => a.z_index > b.z_index ? 1 : -1)
       .filter(l => {
-        if (! this.includeLandmarks && LANDMARKS.includes(l.trait_type)) return false
+        if (! this.includeLandmarks && LANDMARKS.includes(l._trait.type)) return false
 
         return true
       })
@@ -300,8 +320,8 @@ export default class Scape {
     }
 
     const isFlying = hasBeam ||
-      layers[layers.length - 1].value.startsWith('Shuttle') ||
-      layers[layers.length - 1].value.startsWith('Spacelab')
+      layers[layers.length - 1]._trait.value.startsWith('Shuttle') ||
+      layers[layers.length - 1]._trait.value.startsWith('Spacelab')
     if (isFlying && this.height > DEFAULT_HEIGHT) {
       layers[layers.length - 1].top -= (this.height / 2 - 16)
     }
@@ -314,15 +334,15 @@ export default class Scape {
     const HALF = parseInt(DIFF / 2)
 
     for (const [index, layer] of layers.entries()) {
-      if (layer.trait_type === 'Atmosphere' && this.height > DEFAULT_HEIGHT) {
+      if (this.height > DEFAULT_HEIGHT && layer._trait.type === 'Atmosphere' && !layer._trait.fade) {
         layers[index].input = await sharp(layer.input)
-          .resize(DEFAULT_WIDTH, this.height, { kernel: 'nearest' })
-          .toBuffer()
+        .resize(DEFAULT_WIDTH, this.height, { kernel: 'nearest' })
+        .toBuffer()
         layers[index].height = this.height
-      } else if (layer.trait_type === 'Sky') {
+      } else if (layer._trait.type === 'Sky' && !layer._trait.fade) {
         layers[index].tile = true
-      } else if (layer.trait_type === 'Celestial') {
-        if (layer.value.includes('Clouds')) {
+      } else if (layer._trait.type === 'Celestial' && !layer._trait.fade) {
+        if (layer._trait.value.includes('Clouds')) {
           layers[index].tile = true
         } else {
           layers[index].top = layer.top + HALF
