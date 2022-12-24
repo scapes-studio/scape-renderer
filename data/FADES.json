@@ -1,0 +1,536 @@
+{
+    "Atmosphere": {
+        "Blue left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Blue right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Bright left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Bright right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Dark Night left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Dark Night right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Dawn left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Dawn right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Dusk left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Dusk right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Dust left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Dust right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Jungle left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Jungle right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Morning left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Morning right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Red Light left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Red Light right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        },
+        "Soul left": {
+            "zIndex": 0,
+            "x": -24,
+            "y": 0
+        },
+        "Soul right": {
+            "zIndex": 0,
+            "x": 72,
+            "y": 0
+        }
+    },
+    "Celestial": {
+        "Evening Clouds left": {
+            "zIndex": 20,
+            "x": -24,
+            "y": 0
+        },
+        "Evening Clouds right": {
+            "zIndex": 20,
+            "x": 72,
+            "y": 0
+        },
+        "Happy Clouds right": {
+            "zIndex": 20,
+            "x": 72,
+            "y": 0
+        }
+    },
+    "City": {
+        "Daytime Skyscrapers left": {
+            "zIndex": 40,
+            "x": -24,
+            "y": 0
+        },
+        "Daytime Skyscrapers right": {
+            "zIndex": 40,
+            "x": 72,
+            "y": 0
+        },
+        "Lighted Skyscrapers left": {
+            "zIndex": 40,
+            "x": -24,
+            "y": 0
+        },
+        "Lighted Skyscrapers right": {
+            "zIndex": 40,
+            "x": 72,
+            "y": 0
+        },
+        "Old Town left": {
+            "zIndex": 40,
+            "x": -24,
+            "y": 0
+        },
+        "Old Town right": {
+            "zIndex": 40,
+            "x": 72,
+            "y": 0
+        },
+        "Sleeping Skyscrapers left": {
+            "zIndex": 40,
+            "x": -24,
+            "y": 0
+        },
+        "Sleeping Skyscrapers right": {
+            "zIndex": 40,
+            "x": 72,
+            "y": 0
+        }
+    },
+    "Fluid": {
+        "Golden Sea left": {
+            "zIndex": 50,
+            "x": -24,
+            "y": 0
+        },
+        "Golden Sea right": {
+            "zIndex": 50,
+            "x": 72,
+            "y": 0
+        },
+        "Lake left": {
+            "zIndex": 50,
+            "x": -24,
+            "y": 0
+        },
+        "Lake right": {
+            "zIndex": 50,
+            "x": 72,
+            "y": 0
+        },
+        "Ocean left": {
+            "zIndex": 50,
+            "x": -24,
+            "y": 0
+        },
+        "Ocean right": {
+            "zIndex": 50,
+            "x": 72,
+            "y": 0
+        },
+        "Toxic River left": {
+            "zIndex": 50,
+            "x": -24,
+            "y": 0
+        },
+        "Toxic River right": {
+            "zIndex": 50,
+            "x": 72,
+            "y": 0
+        }
+    },
+    "Landscape": {
+        "Gravel Beach right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Gravel Hill right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Gravel Lowland left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Gravel Lowland right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Gravel Valley left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Gravel Valley right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Meadow Beach right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Meadow Hill right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Meadow Lowland left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Meadow Lowland right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Meadow Valley left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Meadow Valley right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Sand Beach right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Sand Hill right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Sand Lowland left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Sand Lowland right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Sand Valley left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Sand Valley right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Shrubs Beach right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Shrubs Hill right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Shrubs Lowland left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Shrubs Lowland right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        },
+        "Shrubs Valley left": {
+            "zIndex": 60,
+            "x": -24,
+            "y": 0
+        },
+        "Shrubs Valley right": {
+            "zIndex": 60,
+            "x": 72,
+            "y": 0
+        }
+    },
+    "Planet": {
+        "Blocks Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Blocks Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Crater Mars left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Crater Mars right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Crater Moon left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Crater Moon right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Desert Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Desert Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Forest Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Forest Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Glacier Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Glacier Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Glacier Europa left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Glacier Europa right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Hills Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Hills Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Hills Mars left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Hills Mars right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Mountain Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Mountain Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Mountain Europa left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Mountain Europa right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Mountain Mars left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Mountain Mars right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Mountain Moon left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Mountain Moon right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        },
+        "Volcano Earth left": {
+            "zIndex": 30,
+            "x": -24,
+            "y": 0
+        },
+        "Volcano Earth right": {
+            "zIndex": 30,
+            "x": 72,
+            "y": 0
+        }
+    },
+    "Sky": {
+        "Dark Stripes left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Dark Stripes right": {
+            "zIndex": 10,
+            "x": 72,
+            "y": 0
+        },
+        "Ether left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Ether right": {
+            "zIndex": 10,
+            "x": 72,
+            "y": 0
+        },
+        "Falling Stars left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Orange Trails left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Orange Trails right": {
+            "zIndex": 10,
+            "x": 72,
+            "y": 0
+        },
+        "Red Stripes left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Red Stripes right": {
+            "zIndex": 10,
+            "x": 72,
+            "y": 0
+        },
+        "Simmering Light left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Simmering Light right": {
+            "zIndex": 10,
+            "x": 72,
+            "y": 0
+        },
+        "Soul Light left": {
+            "zIndex": 10,
+            "x": -24,
+            "y": 0
+        },
+        "Soul Light right": {
+            "zIndex": 10,
+            "x": 72,
+            "y": 0
+        }
+    }
+}

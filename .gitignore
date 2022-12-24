@@ -9,3 +9,5 @@ node_modules
 # Media
 dist/*
 !dist/.gitkeep
+
+*.aseprite

@@ -2,11 +2,10 @@ import yaml from 'yaml'
 import fs from 'fs'
 import sharp from 'sharp'
 
-import COLLECTION from './../data/COLLECTION.json'  assert { type: 'json' }
 import LANDMARKS from '../data/LANDMARKS.json'  assert { type: 'json' }
-import VARIATIONS from './../data/VARIATIONS.json'  assert { type: 'json' }
 import VARIATION_TYPES from './../data/VARIATION_TYPES.json'  assert { type: 'json' }
 import SORTING from './../data/SORTING.json'  assert { type: 'json' }
+import FADES from './../data/FADES.json'  assert { type: 'json' }
 
 const ELEMENT_CONFIG = yaml.parse(fs.readFileSync('data/base_traits/config.yaml').toString())
 const DEFAULT_WIDTH = 72
@@ -14,15 +13,24 @@ const DEFAULT_HEIGHT = 24
 
 export default class Scape {
 
-  constructor (id) {
+  constructor ({
+    id,
+    attributes,
+    variations,
+    width = DEFAULT_WIDTH,
+    height = DEFAULT_HEIGHT,
+    includeLandmarks = true,
+    increaseSunSize =  false,
+    outputWidth = DEFAULT_WIDTH,
+  }) {
     this.id = id
-    this.attributes = COLLECTION.find(s => s.id === id).attributes
-    this.variations = VARIATIONS[id]
-    this.width = DEFAULT_WIDTH
-    this.height = DEFAULT_HEIGHT
-    this.includeLandmarks = true
-    this.increaseSunSize = false
-    this.outputWidth = this.width
+    this.attributes = attributes
+    this.variations = variations
+    this.width = width
+    this.height = height
+    this.includeLandmarks = includeLandmarks
+    this.increaseSunSize = increaseSunSize
+    this.outputWidth = outputWidth
   }
 
   setHeight (height) {
@@ -79,9 +87,11 @@ export default class Scape {
   }
 
   get layers () {
-    return this.attributes
+    const layers = []
+
+    this.attributes
       .filter(t => ! t.display_type) // Filter out date
-      .map((trait, index, attributes) => {
+      .forEach((trait, index, attributes) => {
         let fileName = trait.value
 
         // Handle Planets + Topology
@@ -99,8 +109,8 @@ export default class Scape {
         // Handle random image sets
         const variations = VARIATION_TYPES[fileName]
         let version = 0
-        if (variations && VARIATIONS[this.id]) {
-          version = VARIATIONS[this.id].find(v => v.trait_type === trait.trait_type).version
+        if (variations && this.variations) {
+          version = this.variations.find(v => v.trait_type === trait.trait_type).version
 
           fileName = variations[version]
         }
@@ -108,7 +118,7 @@ export default class Scape {
         const traitConfig = ELEMENT_CONFIG[trait.trait_type]?._config
         const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName]
 
-        return {
+        layers.push({
           input: `data/base_traits/${trait.trait_type}/${fileName}.png`,
           left: elementConfig?.x || 0,
           top: elementConfig?.y || 0,
@@ -118,8 +128,36 @@ export default class Scape {
           trait_type: trait.trait_type,
           value: trait.value,
           version,
+        })
+
+        // Add Fades
+        const fadedCategory = FADES[trait.trait_type]
+        const leftName = `${fileName} left`
+        const rightName = `${fileName} right`
+        if (fadedCategory) {
+          const leftConfig = fadedCategory[leftName]
+          if (leftConfig) layers.push({
+            input: `data/base_traits/${trait.trait_type}/${leftName}.png`,
+            left: leftConfig?.x || 0,
+            top: leftConfig?.y || 0,
+            width: 24,
+            height: 24,
+            z_index: leftConfig.zIndex,
+          })
+
+          const rightConfig = fadedCategory[rightName]
+          if (rightConfig) layers.push({
+            input: `data/base_traits/${trait.trait_type}/${rightName}.png`,
+            left: rightConfig?.x || 0,
+            top: rightConfig?.y || 0,
+            width: 24,
+            height: 24,
+            z_index: rightConfig.zIndex,
+          })
         }
       })
+
+    return layers
       .filter(l => !! l) // Remove empty traits (e.g. topology)
       .sort((a, b) => {
         const aIndex = SORTING.findIndex(i => i === a.trait_type)
