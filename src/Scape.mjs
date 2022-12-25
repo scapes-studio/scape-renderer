@@ -1,20 +1,12 @@
-import yaml from 'yaml'
-import path from 'path'
 import fs from 'fs'
-import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+import LANDMARKS from '../data/LANDMARKS.json' assert { type: 'json' }
+import VARIATION_TYPES from './../data/VARIATION_TYPES.json' assert { type: 'json' }
+import SORTING from './../data/SORTING.json' assert { type: 'json' }
+import FADES from './../data/FADES.json' assert { type: 'json' }
+import ELEMENT_CONFIG from './../data/ELEMENTS.json' assert { type: 'json' }
 
-import LANDMARKS from '../data/LANDMARKS.json'  assert { type: 'json' }
-import VARIATION_TYPES from './../data/VARIATION_TYPES.json'  assert { type: 'json' }
-import SORTING from './../data/SORTING.json'  assert { type: 'json' }
-import FADES from './../data/FADES.json'  assert { type: 'json' }
-
-const ELEMENT_CONFIG = yaml.parse(fs.readFileSync(
-  path.resolve(__dirname, './../data/base_traits/config.yaml')
-).toString())
 const DEFAULT_WIDTH = 72
 const DEFAULT_HEIGHT = 24
 
@@ -216,7 +208,9 @@ export default class Scape {
 
   async prepareLayers () {
     let layers = this.computeDefaultOffsets(this.layers)
-    await this.computeCustomHeightOffsets(layers)
+    if (this.height > DEFAULT_HEIGHT) {
+      await this.computeCustomHeightOffsets(layers)
+    }
 
     for (const layer of layers) {
       if (layer.input.includes('flipped')) {

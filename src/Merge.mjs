@@ -1,5 +1,4 @@
 import fs from 'fs'
-import path from 'path'
 import sharp from 'sharp'
 import ScapeFactory from './ScapeFactory.mjs'
 import SORTING from './../data/SORTING.json'  assert { type: 'json' }
@@ -80,18 +79,26 @@ export default class Merge {
     const scapeLayers = await Promise.all(this.scapes.map(config => config[0].prepareLayers()))
     let layers = []
 
-    SORTING.forEach(category => {
-      scapeLayers.forEach((lrs, index) => {
+    for (const category of SORTING) {
+      for (const [index, lrs] of Object.entries(scapeLayers)) {
+        const flipX = this.scapes[index][1]
         const matching = lrs.filter(l => l._trait.type === category)
 
-        matching.forEach(l => {
+        for (const l of matching) {
+          const scapeOffset = SCAPE_WIDTH * index
+
+          if (flipX) {
+            l.left = SCAPE_WIDTH - l.left - l.width
+            l.input = await sharp(l.input).flop().toBuffer()
+          }
+
           layers.push({
             ...l,
-            left: l.left + SCAPE_WIDTH * index
+            left: l.left + scapeOffset,
           })
-        })
-      })
-    })
+        }
+      }
+    }
 
     try {
       let image = await sharp({
