@@ -2,10 +2,10 @@ import fs from 'fs'
 import sharp from 'sharp'
 
 import LANDMARKS from '../data/LANDMARKS.json' assert { type: 'json' }
-import VARIATION_TYPES from './../data/VARIATION_TYPES.json' assert { type: 'json' }
-import SORTING from './../data/SORTING.json' assert { type: 'json' }
-import FADES from './../data/FADES.json' assert { type: 'json' }
-import ELEMENT_CONFIG from './../data/ELEMENTS.json' assert { type: 'json' }
+import VARIATION_TYPES from '../data/VARIATION_TYPES.json' assert { type: 'json' }
+import SORTING from '../data/SORTING.json' assert { type: 'json' }
+import FADES from '../data/FADES.json' assert { type: 'json' }
+import ELEMENT_CONFIG from '../data/ELEMENTS.json' assert { type: 'json' }
 
 const DEFAULT_WIDTH = 72
 const DEFAULT_HEIGHT = 24

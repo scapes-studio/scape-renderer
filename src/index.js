@@ -1,7 +1,7 @@
 import minimist from 'minimist'
-import COLLECTION from './../data/COLLECTION.json'  assert { type: 'json' }
-import Merge from './Merge.mjs'
-import ScapeFactory from './ScapeFactory.mjs'
+import COLLECTION from '../data/COLLECTION.json'  assert { type: 'json' }
+import Merge from './Merge.js'
+import ScapeFactory from './ScapeFactory.js'
 
 const options = minimist(process.argv.slice(2), {
   string: ['merge-id']

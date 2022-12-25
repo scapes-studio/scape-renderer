@@ -1,7 +1,7 @@
 import fs from 'fs'
 import sharp from 'sharp'
-import ScapeFactory from './ScapeFactory.mjs'
-import SORTING from './../data/SORTING.json'  assert { type: 'json' }
+import ScapeFactory from './ScapeFactory.js'
+import SORTING from '../data/SORTING.json'  assert { type: 'json' }
 
 const SCAPE_WIDTH = 72
 const SCAPE_SIZE = 14

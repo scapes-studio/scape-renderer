@@ -1,6 +1,6 @@
-import COLLECTION from './../data/COLLECTION.json'  assert { type: 'json' }
-import VARIATIONS from './../data/VARIATIONS.json'  assert { type: 'json' }
-import Scape from './Scape.mjs'
+import COLLECTION from '../data/COLLECTION.json'  assert { type: 'json' }
+import VARIATIONS from '../data/VARIATIONS.json'  assert { type: 'json' }
+import Scape from './Scape.js'
 
 export default class ScapeFactory {
 
