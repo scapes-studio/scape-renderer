@@ -1,6 +1,6 @@
 {
   "name": "@scapes-studio/scape-renderer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
