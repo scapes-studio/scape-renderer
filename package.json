@@ -1,10 +1,10 @@
 {
   "name": "@scapes-studio/scape-renderer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc --project tsconfig.json && cp -rf data build/data"
+    "build": "tsc --project tsconfig.json && cp -rf data/* build/data"
   },
   "license": "MIT",
   "dependencies": {
