@@ -244,9 +244,6 @@ export default class Scape {
         if (layer.top < 0) {
           layer.top = 0
         }
-        if (layer.left < 0) {
-          layer.left = 0
-        }
         layer.input = await sharp(layer.input).extract(area).toBuffer()
       }
     }
