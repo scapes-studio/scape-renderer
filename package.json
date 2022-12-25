@@ -1,5 +1,5 @@
 {
-  "name": "scape-renderer",
+  "name": "@scapes-studio/scape-renderer",
   "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
