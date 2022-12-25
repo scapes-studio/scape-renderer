@@ -16,6 +16,28 @@ export default class Merge {
     this.mergeConfig = mergeConfig
   }
 
+  static fromId(stringId) {
+    const id = BigInt(stringId)
+
+    const fade = !!(id & BigInt(1))
+
+    const parts= []
+
+    let mergeId = id >> BigInt(1)
+    for (let i = 0; i < 15; i++) {
+      const filter = (BigInt(1) << BigInt(PART_SIZE * i) + BigInt(SCAPE_SIZE)) - (BigInt(1) << BigInt(PART_SIZE * i));
+      const offset = PART_SIZE * i;
+      const tokenId = (mergeId & filter) >> BigInt(offset);
+      const flipX = !!(mergeId & (BigInt(1) << BigInt(PART_SIZE * i) + BigInt(14)))
+      const flipY = !!(mergeId & (BigInt(1) << BigInt(PART_SIZE * i) + BigInt(15)))
+      if (tokenId) {
+        parts.push([tokenId, flipX, flipY])
+      }
+    }
+
+    return new Merge([parts, fade])
+  }
+
   static fromCommand(command) {
     let cmds = command.split(' ')
     if (command.startsWith('!')) cmds.shift()

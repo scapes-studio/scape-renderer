@@ -3,8 +3,11 @@ import COLLECTION from './../data/COLLECTION.json'  assert { type: 'json' }
 import Merge from './Merge.mjs'
 import ScapeFactory from './ScapeFactory.mjs'
 
-const options = minimist(process.argv.slice(2))
+const options = minimist(process.argv.slice(2), {
+  string: ['merge-id']
+})
 const MERGE = options.merge
+const MERGE_ID = options['merge-id']
 const ID = options.id
 const DEFAULT_HEIGHT = 24
 const HEIGHT = options.height || DEFAULT_HEIGHT
@@ -32,8 +35,9 @@ const renderScape = async (id) => {
 }
 
 const run = async () => {
-  if (MERGE) {
-    const merge = Merge.fromCommand(MERGE)
+  if (MERGE || MERGE_ID) {
+    console.log(MERGE_ID)
+    const merge = MERGE ? Merge.fromCommand(MERGE) : Merge.fromId(MERGE_ID)
     await merge.render()
     await merge.save()
     return
