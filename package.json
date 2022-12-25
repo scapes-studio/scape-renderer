@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc --project tsconfig.json"
+    "build": "tsc --project tsconfig.json && cp -rf data build/data"
   },
   "license": "MIT",
   "dependencies": {
