@@ -1,11 +1,13 @@
+// @ts-nocheck
 import fs from 'fs'
+import path from 'path'
 import sharp from 'sharp'
 
-import LANDMARKS from '../data/LANDMARKS.json' assert { type: 'json' }
-import VARIATION_TYPES from '../data/VARIATION_TYPES.json' assert { type: 'json' }
-import SORTING from '../data/SORTING.json' assert { type: 'json' }
-import FADES from '../data/FADES.json' assert { type: 'json' }
-import ELEMENT_CONFIG from '../data/ELEMENTS.json' assert { type: 'json' }
+import LANDMARKS from './../data/LANDMARKS.json'
+import VARIATION_TYPES from './../data/VARIATION_TYPES.json'
+import SORTING from './../data/SORTING.json'
+import FADES from './../data/FADES.json'
+import ELEMENT_CONFIG from './../data/ELEMENTS.json'
 
 const DEFAULT_WIDTH = 72
 const DEFAULT_HEIGHT = 24
@@ -118,7 +120,7 @@ export default class Scape {
         const elementConfig = ELEMENT_CONFIG[trait.trait_type]?.[fileName]
 
         layers.push({
-          input: `data/base_traits/${trait.trait_type}/${fileName}.png`,
+          input: path.resolve(__dirname, `../data/base_traits/${trait.trait_type}/${fileName}.png`),
           left: elementConfig?.x || 0,
           top: elementConfig?.y || 0,
           width: elementConfig?.width || DEFAULT_WIDTH,
@@ -138,7 +140,7 @@ export default class Scape {
         if (fadedCategory) {
           const leftConfig = fadedCategory[leftName]
           if (leftConfig) layers.push({
-            input: `data/base_traits/${trait.trait_type}/${leftName}.png`,
+            input: path.resolve(__dirname, `../data/base_traits/${trait.trait_type}/${leftName}.png`),
             left: leftConfig?.x || 0,
             top: leftConfig?.y || 0,
             width: 24,
@@ -153,7 +155,7 @@ export default class Scape {
 
           const rightConfig = fadedCategory[rightName]
           if (rightConfig) layers.push({
-            input: `data/base_traits/${trait.trait_type}/${rightName}.png`,
+            input: path.resolve(__dirname, `../data/base_traits/${trait.trait_type}/${rightName}.png`),
             left: rightConfig?.x || 0,
             top: rightConfig?.y || 0,
             width: 24,

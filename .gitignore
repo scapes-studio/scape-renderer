@@ -10,4 +10,7 @@ node_modules
 dist/*
 !dist/.gitkeep
 
+# Builds
+build
+
 *.aseprite

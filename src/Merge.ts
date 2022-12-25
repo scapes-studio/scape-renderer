@@ -1,7 +1,8 @@
+// @ts-nocheck
 import fs from 'fs'
 import sharp from 'sharp'
-import ScapeFactory from './ScapeFactory.js'
-import SORTING from '../data/SORTING.json'  assert { type: 'json' }
+import ScapeFactory from './ScapeFactory'
+import SORTING from './../data/SORTING.json'
 
 const SCAPE_WIDTH = 72
 const SCAPE_SIZE = 14
@@ -21,7 +22,7 @@ export default class Merge {
 
     const fade = !!(id & BigInt(1))
 
-    const parts= []
+    const parts = []
 
     let mergeId = id >> BigInt(1)
     for (let i = 0; i < 15; i++) {
@@ -112,6 +113,10 @@ export default class Merge {
           if (flipX) {
             l.left = SCAPE_WIDTH - l.left - l.width
             l.input = await sharp(l.input).flop().toBuffer()
+          }
+
+          if (!this.fade && l._trait.fade) {
+            continue
           }
 
           layers.push({

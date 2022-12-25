@@ -1,7 +1,10 @@
 import minimist from 'minimist'
-import COLLECTION from '../data/COLLECTION.json'  assert { type: 'json' }
-import Merge from './Merge.js'
-import ScapeFactory from './ScapeFactory.js'
+import collectionData from '../data/COLLECTION.json'
+import Merge from './Merge'
+import ScapeFactory from './ScapeFactory'
+import { MetaData } from './types'
+
+const COLLECTION = collectionData as MetaData[]
 
 const options = minimist(process.argv.slice(2), {
   string: ['merge-id']
@@ -36,7 +39,6 @@ const renderScape = async (id) => {
 
 const run = async () => {
   if (MERGE || MERGE_ID) {
-    console.log(MERGE_ID)
     const merge = MERGE ? Merge.fromCommand(MERGE) : Merge.fromId(MERGE_ID)
     await merge.render()
     await merge.save()
