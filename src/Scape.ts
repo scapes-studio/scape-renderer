@@ -236,9 +236,9 @@ export default class Scape {
 
       if (layer.height > this.height || layer.width > this.width) {
         const area = {
-          left: layer.left < 0 ? Math.abs(layer.left) : 0,
+          left: 0,
           top: layer.top < 0 ? Math.abs(layer.top) : 0,
-          width: Math.min(this.width, layer.left < 0 ? layer.width - Math.abs(layer.left) : layer.width),
+          width: layer.width,
           height: Math.min(this.height, layer.height - Math.abs(layer.top)),
         }
         if (layer.top < 0) {
