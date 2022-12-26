@@ -2,7 +2,7 @@
 import fs from 'fs'
 import sharp from 'sharp'
 import ScapeFactory from './ScapeFactory'
-import SORTING from './../data/SORTING.json'
+import LAYER_SORTING from './../data/LAYER_SORTING.json'
 
 const SCAPE_WIDTH = 72
 const SCAPE_SIZE = 14
@@ -102,7 +102,7 @@ export default class Merge {
     const scapeLayers = await Promise.all(this.scapes.map(config => config[0].prepareLayers()))
     let layers = []
 
-    for (const category of SORTING) {
+    for (const category of LAYER_SORTING) {
       for (const [index, lrs] of Object.entries(scapeLayers)) {
         const flipX = this.scapes[index][1]
         const matching = lrs.filter(l => l._trait.type === category)
