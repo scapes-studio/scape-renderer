@@ -98,6 +98,10 @@ export default class Merge {
     return 24
   }
 
+  upscale (times = 15) {
+    this.outputWidth = this.width * times
+  }
+
   async render () {
     const scapeLayers = await Promise.all(this.scapes.map(config => config[0].prepareLayers()))
     let layers = []

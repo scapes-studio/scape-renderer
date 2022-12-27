@@ -30,8 +30,8 @@ const renderScape = async (id) => {
   }
 
   if (UPSCALE) {
-    const width = typeof UPSCALE === 'number' ? UPSCALE : undefined
-    scape.upscale(width)
+    const times = typeof UPSCALE === 'number' ? UPSCALE : undefined
+    scape.upscale(times)
   }
 
   return await scape.render()
@@ -40,6 +40,12 @@ const renderScape = async (id) => {
 const run = async () => {
   if (MERGE || MERGE_ID) {
     const merge = MERGE ? Merge.fromCommand(MERGE) : Merge.fromId(MERGE_ID)
+
+    if (UPSCALE) {
+      const times = typeof UPSCALE === 'number' ? UPSCALE : undefined
+      merge.upscale(times)
+    }
+
     await merge.render()
     await merge.save()
     return

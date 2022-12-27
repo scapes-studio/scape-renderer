@@ -40,8 +40,8 @@ export default class Scape {
     return this
   }
 
-  upscale (width = DEFAULT_WIDTH * 20) {
-    this.outputWidth = width
+  upscale (times = 15) {
+    this.outputWidth = this.width * times
   }
 
   skipLandmarks () {
