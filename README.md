@@ -31,3 +31,15 @@ A simple script to render Scapes based on [Scape Element](https://opensea.io/col
 - `--upscale={123}`: Upscale the output to {123}px width
 - `--merge={id1+id2}`: Merge multiple Scapes together
 - `--merge-id={id}`: Render a pre-defined merge by its ID
+
+## Send/Receive by Snowfro
+
+To generate a valid output for [Send/Receive by Snowfro](https://www.sendreceive.org/):
+
+1. Generate a 32x32 or 64x64 Scape PNG
+2. Convert it to a hex string via the `png-to-hex` command
+
+```bash
+pnpm exec ts-node src/index.ts --id=9 --height=64 --width=64 --sun-offset=5
+pnpm exec ts-node src/png-to-hex.ts --input dist/9.png
+```
