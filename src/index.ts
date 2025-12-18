@@ -15,7 +15,7 @@ const ID = options.id
 const DEFAULT_HEIGHT = 24
 const HEIGHT = options.height || DEFAULT_HEIGHT
 const SKIP_LANDMARKS = options['skip-landmarks'] || false
-const BUMP_SUNS = options['bump-suns'] || false
+const SUN_OFFSET = options['sun-offset']
 const UPSCALE = options['upscale'] || false
 const HEX = options['hex'] || false
 const WIDTH = options['width'] || false
@@ -28,8 +28,8 @@ const renderScape = async (id) => {
     scape.skipLandmarks()
   }
 
-  if (BUMP_SUNS) {
-    scape.bumpSuns()
+  if (SUN_OFFSET !== undefined) {
+    scape.setSunOffset(SUN_OFFSET)
   }
 
   if (UPSCALE) {
