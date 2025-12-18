@@ -199,13 +199,27 @@ export default class Scape {
           .resize(this.outputWidth, null, { kernel: 'nearest' })
       }
 
-      fs.writeFileSync(`dist/${this.id}.png`, await image.toBuffer())
+      this.image = await image.toBuffer()
+      fs.writeFileSync(`dist/${this.id}.png`, this.image)
 
       console.log(`RENDERED SCAPE #${this.id}`)
     } catch (e) {
       console.error(`IMAGE RENDERING ERROR FOR SCAPE #${this.id}`)
       console.log(e, layers)
     }
+  }
+
+  async toHex () {
+    if (!this.image) {
+      await this.render()
+    }
+
+    const { data } = await sharp(this.image)
+      .removeAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true })
+
+    return data.toString('hex').toUpperCase()
   }
 
   async prepareLayers () {

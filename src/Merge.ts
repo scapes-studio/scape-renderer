@@ -163,4 +163,17 @@ export default class Merge {
     console.log(`RENDERED SCAPE #${this.id}`)
   }
 
+  async toHex () {
+    if (!this.image) {
+      await this.render()
+    }
+
+    const { data } = await sharp(this.image)
+      .removeAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true })
+
+    return data.toString('hex').toUpperCase()
+  }
+
 }

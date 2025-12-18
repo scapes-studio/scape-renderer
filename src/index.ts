@@ -17,6 +17,7 @@ const HEIGHT = options.height || DEFAULT_HEIGHT
 const SKIP_LANDMARKS = options['skip-landmarks'] || false
 const BUMP_SUNS = options['bump-suns'] || false
 const UPSCALE = options['upscale'] || false
+const HEX = options['hex'] || false
 
 const renderScape = async (id) => {
   const scape = ScapeFactory.create(id).setHeight(HEIGHT)
@@ -34,7 +35,13 @@ const renderScape = async (id) => {
     scape.upscale(times)
   }
 
-  return await scape.render()
+  await scape.render()
+
+  if (HEX) {
+    const hex = await scape.toHex()
+    console.log(hex)
+    return hex
+  }
 }
 
 const run = async () => {
@@ -47,6 +54,13 @@ const run = async () => {
     }
 
     await merge.render()
+
+    if (HEX) {
+      const hex = await merge.toHex()
+      console.log(hex)
+      return hex
+    }
+
     await merge.save()
     return
   }
