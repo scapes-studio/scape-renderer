@@ -179,17 +179,4 @@ export default class Merge {
     return this
   }
 
-  async toHex () {
-    if (!this.image) {
-      await this.render()
-    }
-
-    const { data } = await sharp(this.image)
-      .removeAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true })
-
-    return data.toString('hex').toUpperCase()
-  }
-
 }

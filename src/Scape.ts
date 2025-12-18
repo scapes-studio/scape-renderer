@@ -14,7 +14,7 @@ const DEFAULT_HEIGHT = 24
 
 export default class Scape {
 
-  constructor ({
+  constructor({
     id,
     attributes,
     variations,
@@ -34,31 +34,31 @@ export default class Scape {
     this.outputWidth = outputWidth
   }
 
-  setHeight (height) {
+  setHeight(height) {
     this.height = height
 
     return this
   }
 
-  upscale (times = 15) {
+  upscale(times = 15) {
     this.outputWidth = this.width * times
   }
 
-  skipLandmarks () {
+  skipLandmarks() {
     this.includeLandmarks = false
   }
 
-  setSunOffset (offset) {
+  setSunOffset(offset) {
     this.sunOffset = offset
   }
 
-  getAttribute (type, key = 'trait_type') {
+  getAttribute(type, key = 'trait_type') {
     return this.attributes.find((a) => a[key] === type)
   }
 
-  isLandmark (type) { return LANDMARKS.includes(type) }
+  isLandmark(type) { return LANDMARKS.includes(type) }
 
-  get landMarkCount () {
+  get landMarkCount() {
     return this.attributes.reduce((count, attribute) => {
       if (this.isLandmark(attribute.trait_type)) {
         count += 1
@@ -67,31 +67,31 @@ export default class Scape {
     }, 0)
   }
 
-  get hasPlanet () {
-    return !! this.getAttribute('Planet')
+  get hasPlanet() {
+    return !!this.getAttribute('Planet')
   }
 
-  get hasUFO () {
-    return !! this.getAttribute('UFO', 'value')
+  get hasUFO() {
+    return !!this.getAttribute('UFO', 'value')
   }
 
-  get hasCity () {
-    return !! this.getAttribute('City')
+  get hasCity() {
+    return !!this.getAttribute('City')
   }
 
-  get landScapeType () {
+  get landScapeType() {
     return this.getAttribute('Landscape')?.value
   }
 
-  get hasLandscape () {
-    return !! this.landScapeType
+  get hasLandscape() {
+    return !!this.landScapeType
   }
 
-  get layers () {
+  get layers() {
     const layers = []
 
     this.attributes
-      .filter(t => ! t.display_type) // Filter out date
+      .filter(t => !t.display_type) // Filter out date
       .forEach((trait, index, attributes) => {
         let fileName = trait.value
 
@@ -171,7 +171,7 @@ export default class Scape {
       })
 
     return layers
-      .filter(l => !! l) // Remove empty traits (e.g. topology)
+      .filter(l => !!l) // Remove empty traits (e.g. topology)
       .sort((a, b) => {
         const aIndex = SORTING.findIndex(i => i === a._trait.type)
         const bIndex = SORTING.findIndex(i => i === b._trait.type)
@@ -179,7 +179,7 @@ export default class Scape {
       })
   }
 
-  async render () {
+  async render() {
     let layers = await this.prepareLayers()
 
     try {
@@ -209,7 +209,7 @@ export default class Scape {
     }
   }
 
-  async crop (targetWidth, offset = null) {
+  async crop(targetWidth, offset = null) {
     if (!this.image) {
       await this.render()
     }
@@ -225,24 +225,11 @@ export default class Scape {
     return this
   }
 
-  save (distPath = `dist/${this.id}.png`) {
+  save(distPath = `dist/${this.id}.png`) {
     fs.writeFileSync(distPath, this.image)
   }
 
-  async toHex () {
-    if (!this.image) {
-      await this.render()
-    }
-
-    const { data } = await sharp(this.image)
-      .removeAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true })
-
-    return data.toString('hex').toUpperCase()
-  }
-
-  async prepareLayers () {
+  async prepareLayers() {
     let layers = this.computeDefaultOffsets(this.layers)
     if (this.height > DEFAULT_HEIGHT) {
       await this.computeCustomHeightOffsets(layers)
@@ -286,13 +273,13 @@ export default class Scape {
     return layers
       .sort((a, b) => a.z_index > b.z_index ? 1 : -1)
       .filter(l => {
-        if (! this.includeLandmarks && LANDMARKS.includes(l._trait.type)) return false
+        if (!this.includeLandmarks && LANDMARKS.includes(l._trait.type)) return false
 
         return true
       })
   }
 
-  computeDefaultOffsets (layers) {
+  computeDefaultOffsets(layers) {
     if (
       this.landMarkCount > 1 &&
       (
@@ -301,7 +288,7 @@ export default class Scape {
         this.landScapeType === 'Island'
       )
     ) {
-      layers[layers.length - 2].left -=8
+      layers[layers.length - 2].left -= 8
       layers[layers.length - 1].left += 8
     }
 
@@ -356,15 +343,15 @@ export default class Scape {
     return layers
   }
 
-  async computeCustomHeightOffsets (layers) {
+  async computeCustomHeightOffsets(layers) {
     const DIFF = this.height - DEFAULT_HEIGHT
     const HALF = parseInt(DIFF / 2)
 
     for (const [index, layer] of layers.entries()) {
       if (this.height > DEFAULT_HEIGHT && layer._trait.type === 'Atmosphere' && !layer._trait.fade) {
         layers[index].input = await sharp(layer.input)
-        .resize(DEFAULT_WIDTH, this.height, { kernel: 'nearest' })
-        .toBuffer()
+          .resize(DEFAULT_WIDTH, this.height, { kernel: 'nearest' })
+          .toBuffer()
         layers[index].height = this.height
       } else if (layer._trait.type === 'Sky' && !layer._trait.fade) {
         layers[index].tile = true

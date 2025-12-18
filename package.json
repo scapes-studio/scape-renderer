@@ -4,7 +4,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc --project tsconfig.json && cp -rf data/* build/data"
+    "build": "tsc --project tsconfig.json && cp -rf data/* build/data",
+    "png-to-hex": "ts-node src/png-to-hex.ts"
   },
   "license": "MIT",
   "dependencies": {

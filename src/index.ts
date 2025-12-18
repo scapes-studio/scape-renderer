@@ -17,7 +17,6 @@ const HEIGHT = options.height || DEFAULT_HEIGHT
 const SKIP_LANDMARKS = options['skip-landmarks'] || false
 const SUN_OFFSET = options['sun-offset']
 const UPSCALE = options['upscale'] || false
-const HEX = options['hex'] || false
 const WIDTH = options['width'] || false
 const OFFSET = options['offset']
 
@@ -43,12 +42,6 @@ const renderScape = async (id) => {
     await scape.crop(WIDTH, OFFSET !== undefined ? OFFSET : null)
     scape.save()
   }
-
-  if (HEX) {
-    const hex = await scape.toHex()
-    console.log(hex)
-    return hex
-  }
 }
 
 const run = async () => {
@@ -64,12 +57,6 @@ const run = async () => {
 
     if (WIDTH) {
       await merge.crop(WIDTH, OFFSET !== undefined ? OFFSET : null)
-    }
-
-    if (HEX) {
-      const hex = await merge.toHex()
-      console.log(hex)
-      return hex
     }
 
     await merge.save()
