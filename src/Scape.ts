@@ -209,6 +209,26 @@ export default class Scape {
     }
   }
 
+  async crop (targetWidth, offset = null) {
+    if (!this.image) {
+      await this.render()
+    }
+
+    const metadata = await sharp(this.image).metadata()
+    const currentWidth = metadata.width
+    const left = offset !== null ? offset : Math.floor((currentWidth - targetWidth) / 2)
+
+    this.image = await sharp(this.image)
+      .extract({ left, top: 0, width: targetWidth, height: metadata.height })
+      .toBuffer()
+
+    return this
+  }
+
+  save (distPath = `dist/${this.id}.png`) {
+    fs.writeFileSync(distPath, this.image)
+  }
+
   async toHex () {
     if (!this.image) {
       await this.render()

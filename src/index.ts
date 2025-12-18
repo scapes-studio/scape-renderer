@@ -18,6 +18,8 @@ const SKIP_LANDMARKS = options['skip-landmarks'] || false
 const BUMP_SUNS = options['bump-suns'] || false
 const UPSCALE = options['upscale'] || false
 const HEX = options['hex'] || false
+const WIDTH = options['width'] || false
+const OFFSET = options['offset']
 
 const renderScape = async (id) => {
   const scape = ScapeFactory.create(id).setHeight(HEIGHT)
@@ -37,6 +39,11 @@ const renderScape = async (id) => {
 
   await scape.render()
 
+  if (WIDTH) {
+    await scape.crop(WIDTH, OFFSET !== undefined ? OFFSET : null)
+    scape.save()
+  }
+
   if (HEX) {
     const hex = await scape.toHex()
     console.log(hex)
@@ -54,6 +61,10 @@ const run = async () => {
     }
 
     await merge.render()
+
+    if (WIDTH) {
+      await merge.crop(WIDTH, OFFSET !== undefined ? OFFSET : null)
+    }
 
     if (HEX) {
       const hex = await merge.toHex()
