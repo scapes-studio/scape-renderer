@@ -1,22 +1,22 @@
 {
-  "name": "@scapes-studio/scape-renderer",
-  "version": "1.0.6",
-  "main": "src/index.ts",
-  "scripts": {
-    "start": "ts-node src/index.ts",
-    "build": "tsc --project tsconfig.json && cp -rf data/* build/data",
-    "png-to-hex": "ts-node src/png-to-hex.ts"
-  },
-  "license": "MIT",
-  "dependencies": {
-    "@types/node": "^18.11.17",
-    "minimist": "^1.2.7",
-    "sharp": "^0.31.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.4",
-    "yaml": "^2.1.3"
-  },
-  "files": [
-    "build/**/*"
-  ]
+    "name": "@scapes-studio/scape-renderer",
+    "version": "1.0.6",
+    "main": "src/index.ts",
+    "scripts": {
+        "build": "tsc --project tsconfig.json && cp -rf data/* build/data",
+        "generate": "ts-node src/index.ts",
+        "png-to-hex": "ts-node src/png-to-hex.ts"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@types/node": "^18.11.17",
+        "minimist": "^1.2.7",
+        "sharp": "^0.31.2",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.4",
+        "yaml": "^2.1.3"
+    },
+    "files": [
+        "build/**/*"
+    ]
 }
