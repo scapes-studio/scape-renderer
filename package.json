@@ -1,6 +1,6 @@
 {
     "name": "@scapes-studio/scape-renderer",
-    "version": "1.0.6",
+    "version": "1.1.0",
     "main": "src/index.ts",
     "scripts": {
         "build": "tsc --project tsconfig.json && cp -rf data/* build/data",
